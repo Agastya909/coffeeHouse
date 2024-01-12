@@ -1,3 +1,3 @@
-const COFFEE_TYPES = ["All", "Americano", "Black Coffee", "Cappucchino", "Espresso", "Latte", "Macchiato"];
+const COFFEE_TYPES = ["All", "Chocolate", "Tea", "Coffee"];
 
 export { COFFEE_TYPES };
