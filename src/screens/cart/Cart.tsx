@@ -66,7 +66,7 @@ const Cart: React.FC = () => {
         <LottieView
           loop
           autoPlay
-          source={require("../../assets/animations/empty-cart-animation.json")}
+          source={require("../../assets/animations/coffe-cup-animation.json")}
           style={{ height: 250, width: 250, alignSelf: "center", flex: 1 }}
         />
       )}

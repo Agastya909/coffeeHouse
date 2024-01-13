@@ -27,7 +27,7 @@ const Fav: React.FC = () => {
           <LottieView
             autoPlay
             loop
-            source={require("../../assets/animations/spilled-animation.json")}
+            source={require("../../assets/animations/coffe-cup-animation.json")}
             style={{ height: 200, width: 200, alignSelf: "center", marginVertical: "auto", flex: 0.8 }}
           />
           <Text
