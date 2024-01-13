@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ImageSourcePropType } from "react-native";
 
-type favItem = {
+export type favItem = {
   id: string;
   name: string;
   description: string;

@@ -5,20 +5,20 @@ import { COFFEE_TYPES } from "../../assets/data/categories";
 import CoffeeData from "../../assets/data/coffee";
 import BeansData from "../../assets/data/beans";
 import ItemCard from "./ItemCard";
+import LottieView from "lottie-react-native";
 
-const Home = () => {
+const Home: React.FC = () => {
   const { colors } = useTheme();
   const [coffeeType, setCoffeeType] = useState<string>("All");
   return (
     <View style={{ marginHorizontal: 10, flex: 1 }}>
       {/* Header text */}
-      <Text style={{ width: "60%", fontSize: 32, fontFamily: "Poppins-SemiBold", color: "#FFF", marginTop: 40 }}>
+      <Text style={{ width: "80%", fontSize: 32, fontFamily: "Poppins-SemiBold", color: "#FFF", marginTop: 40 }}>
         Find the best Drink for you
       </Text>
       {/* search bar */}
       <TextInput
         style={{
-          width: "100%",
           marginTop: 20,
           paddingHorizontal: 10,
           paddingTop: 10,
