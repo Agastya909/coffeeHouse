@@ -1,6 +1,6 @@
 import { useNavigation, useTheme } from "@react-navigation/native";
 import React, { useState } from "react";
-import { Settings, Text } from "react-native";
+import { Text } from "react-native";
 import { Image, Pressable, View } from "react-native";
 import { favItem, updateFavList } from "../../store/reducers/fav";
 import { RootStackParams } from "../../Navigation";
@@ -39,7 +39,7 @@ const FavItemCard: React.FC<{ item: favItem }> = ({ item }) => {
               setAddToCart(true);
               setTimeout(() => {
                 dispatch(updateFavList(item));
-              }, 1499);
+              }, 499);
             }}
             style={{
               backgroundColor: colors.primary,
@@ -53,7 +53,7 @@ const FavItemCard: React.FC<{ item: favItem }> = ({ item }) => {
           </Pressable>
         ) : (
           <LottieView
-            duration={1500}
+            duration={500}
             autoPlay
             loop={false}
             source={require("../../assets/animations/check-animation.json")}

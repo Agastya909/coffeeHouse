@@ -1,22 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ImageSourcePropType } from "react-native";
+import { cartItem } from "../reducers/cart";
 
-export type favItem = {
-  id: string;
-  name: string;
-  description: string;
-  roasted?: string;
-  imagelink_square: ImageSourcePropType;
-  imagelink_portrait: ImageSourcePropType;
-  ingredients: string;
-  special_ingredient: string;
-  price: number;
-  average_rating: number;
-  ratings_count: number;
-  favourite: boolean;
-  type: string;
-  index: number;
-};
+export type favItem = cartItem;
 
 const initialState: { itemList: favItem[] } = {
   itemList: []

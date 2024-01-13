@@ -4,27 +4,19 @@ import { useNavigation, useTheme } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { RootStackParams } from "../../Navigation/index";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { updateFavList, favItem } from "../../store/reducers/fav";
 
-type Props = {
-  id: string;
-  name: string;
-  description: string;
-  roasted?: string;
-  imagelink_square: ImageSourcePropType;
-  imagelink_portrait: ImageSourcePropType;
-  ingredients: string;
-  special_ingredient: string;
-  price: number;
-  average_rating: number;
-  ratings_count: number;
-  favourite: boolean;
-  type: string;
-  index: number;
-};
+type Props = favItem;
 
 const ItemCard: React.FC<{ item: Props }> = ({ item }) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const { colors } = useTheme();
+  const favItems = useSelector((state: RootState) => state.favItemReducer.itemList);
+  const isItemInFavList = favItems.some(el => el.id === item.id);
+  const dispatch = useDispatch();
+
   return (
     <Pressable
       onPress={() => navigation.navigate("details", item)}
@@ -79,8 +71,9 @@ const ItemCard: React.FC<{ item: Props }> = ({ item }) => {
         <Text style={{ fontFamily: "Poppins-Regular", fontSize: 16, color: colors.border }}>{item.price}</Text>
       </View>
       <TouchableOpacity
-        style={{ position: "absolute", right: 10, bottom: 10, backgroundColor: colors.primary, borderRadius: 5 }}>
-        <Icon name="plus" size={28} color={colors.text} />
+        style={{ position: "absolute", right: 10, bottom: 10 }}
+        onPress={() => dispatch(updateFavList(item))}>
+        <Icon name="heart" size={24} color={isItemInFavList ? "#FF6666" : "#FFFFFF"} />
       </TouchableOpacity>
     </Pressable>
   );

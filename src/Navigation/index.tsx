@@ -4,25 +4,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BottomTabs from "./BottomTabs";
 import Details from "../screens/itemDetail/Details";
+import { cartItem } from "../store/reducers/cart";
 
 export type RootStackParams = {
   tabs: undefined;
-  details: {
-    id: string;
-    name: string;
-    description: string;
-    roasted?: string;
-    imagelink_square: ImageSourcePropType;
-    imagelink_portrait: ImageSourcePropType;
-    ingredients: string;
-    special_ingredient: string;
-    price: number;
-    average_rating: number;
-    ratings_count: number;
-    favourite: boolean;
-    type: string;
-    index: number;
-  };
+  details: cartItem;
 };
 
 const Stack = createNativeStackNavigator<RootStackParams>();

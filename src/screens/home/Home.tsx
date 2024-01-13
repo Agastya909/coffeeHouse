@@ -1,11 +1,10 @@
 import { useTheme } from "@react-navigation/native";
 import React, { useState } from "react";
-import { FlatList, Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { FlatList, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import { COFFEE_TYPES } from "../../assets/data/categories";
 import CoffeeData from "../../assets/data/coffee";
 import BeansData from "../../assets/data/beans";
 import ItemCard from "./ItemCard";
-import LottieView from "lottie-react-native";
 
 const Home: React.FC = () => {
   const { colors } = useTheme();

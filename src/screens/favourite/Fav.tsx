@@ -1,13 +1,12 @@
 import React from "react";
-import { FlatList, Image, Pressable, Text, View } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { FlatList, Text, View } from "react-native";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { useTheme } from "@react-navigation/native";
 import FavItemCard from "./FavItemCard";
 import LottieView from "lottie-react-native";
 
 const Fav: React.FC = () => {
-  const dispatch = useDispatch();
   const favItems = useSelector((state: RootState) => state.favItemReducer.itemList);
   const { colors } = useTheme();
   return (
@@ -47,7 +46,6 @@ const Fav: React.FC = () => {
           bounces={true}
           showsVerticalScrollIndicator={false}
           renderItem={({ item, index }) => <FavItemCard item={item} key={index} />}
-          keyExtractor={(item, index) => item.id.toString()} // Make sure to replace 'id' with the actual unique key property in your 'favItems'
         />
       )}
     </View>

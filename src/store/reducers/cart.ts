@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ImageSourcePropType } from "react-native";
 
-type cartItem = {
+export type cartItem = {
   id: string;
   name: string;
   description: string;
@@ -18,7 +18,7 @@ type cartItem = {
   index: number;
 };
 
-type cartItemWithQuantity = {
+export type cartItemWithQuantity = {
   item: cartItem;
   quantity: number;
 };
@@ -47,7 +47,7 @@ export const cartReducer = createSlice({
         if (state.itemList[existingItemIndex].quantity > 1) {
           state.itemList[existingItemIndex].quantity--;
         } else {
-          state.itemList = [];
+          state.itemList.splice(existingItemIndex, 1);
         }
       }
     },
