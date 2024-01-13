@@ -7,14 +7,15 @@ import { RootStackParams } from "../../Navigation/index";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { updateFavList, favItem } from "../../store/reducers/fav";
+import { addToCart, removeFromCart } from "../../store/reducers/cart";
 
 type Props = favItem;
 
 const ItemCard: React.FC<{ item: Props }> = ({ item }) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const { colors } = useTheme();
-  const favItems = useSelector((state: RootState) => state.favItemReducer.itemList);
-  const isItemInFavList = favItems.some(el => el.id === item.id);
+  const cartItems = useSelector((state: RootState) => state.cartReducer.itemList);
+  const itemIndex = cartItems.findIndex(el => el.item.id === item.id);
   const dispatch = useDispatch();
 
   return (
@@ -54,27 +55,54 @@ const ItemCard: React.FC<{ item: Props }> = ({ item }) => {
         }}>
         {item.name}
       </Text>
-      <Text style={{ fontFamily: "Poppins-Regular", fontSize: 12, color: colors.border, fontStyle: "italic" }}>
+      <Text
+        style={{
+          fontFamily: "Poppins-Regular",
+          fontSize: 12,
+          color: colors.border,
+          fontStyle: "italic",
+          marginTop: 5
+        }}>
         {item.special_ingredient}
       </Text>
-      <View style={{ display: "flex", flexDirection: "row", marginTop: 5 }}>
-        <Text
+      <View style={{ display: "flex", flexDirection: "row", marginTop: 15, justifyContent: "space-between" }}>
+        <View style={{ display: "flex", flexDirection: "row" }}>
+          <Text
+            style={{
+              fontFamily: "Poppins-Regular",
+              fontSize: 16,
+              color: colors.notification,
+              fontWeight: "800",
+              marginRight: 2
+            }}>
+            ₹
+          </Text>
+          <Text style={{ fontFamily: "Poppins-Regular", fontSize: 16, color: colors.border }}>{item.price}</Text>
+        </View>
+        <View
           style={{
-            fontFamily: "Poppins-Regular",
-            fontSize: 16,
-            color: colors.notification,
-            fontWeight: "800",
-            marginRight: 2
+            display: "flex",
+            flexDirection: "row",
+            borderWidth: 1,
+            borderRadius: 10,
+            borderColor: colors.notification,
+            alignItems: "center"
           }}>
-          ₹
-        </Text>
-        <Text style={{ fontFamily: "Poppins-Regular", fontSize: 16, color: colors.border }}>{item.price}</Text>
+          {itemIndex >= 0 ? (
+            <>
+              <TouchableOpacity style={{ padding: 2 }} onPress={() => dispatch(removeFromCart(item.id))}>
+                <Icon name="minus" size={22} color={colors.text} />
+              </TouchableOpacity>
+              <Text style={{ fontSize: 14, fontFamily: "Poppins-Regular", paddingHorizontal: 3 }}>
+                {cartItems[itemIndex].quantity}
+              </Text>
+            </>
+          ) : null}
+          <TouchableOpacity style={{ padding: 2 }} onPress={() => dispatch(addToCart(item))}>
+            <Icon name="plus" size={22} color={colors.text} />
+          </TouchableOpacity>
+        </View>
       </View>
-      <TouchableOpacity
-        style={{ position: "absolute", right: 10, bottom: 10 }}
-        onPress={() => dispatch(updateFavList(item))}>
-        <Icon name="heart" size={24} color={isItemInFavList ? "#FF6666" : "#FFFFFF"} />
-      </TouchableOpacity>
     </Pressable>
   );
 };

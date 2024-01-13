@@ -13,6 +13,7 @@ const CartItemCard: React.FC<{ cartItem: cartItemWithQuantity }> = ({ cartItem }
   return (
     <View
       style={{
+        width: "100%",
         display: "flex",
         flexDirection: "row",
         marginVertical: 5,
@@ -63,6 +64,12 @@ const CartItemCard: React.FC<{ cartItem: cartItemWithQuantity }> = ({ cartItem }
             }}>
             <Icon name="plus" size={28} color={colors.text} />
           </Pressable>
+          <Text style={{ marginLeft: 20, fontFamily: "Poppins-SemiBold", fontSize: 20, color: colors.notification }}>
+            ₹{" "}
+          </Text>
+          <Text style={{ fontFamily: "Poppins-SemiBold", fontSize: 20, color: colors.text }}>
+            {item.price * quantity}
+          </Text>
         </View>
       </View>
     </View>

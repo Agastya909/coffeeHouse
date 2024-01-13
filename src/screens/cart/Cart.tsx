@@ -33,9 +33,13 @@ const Cart: React.FC = () => {
               <Text style={{ fontSize: 16, fontFamily: "Poppins-Regular", color: colors.text, textAlign: "center" }}>
                 Total Amount
               </Text>
-              <Text style={{ fontSize: 16, fontFamily: "Poppins-Regular", color: colors.text, textAlign: "center" }}>
-                {totalAmount}
-              </Text>
+              <View style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+                <Text
+                  style={{ marginLeft: 10, fontFamily: "Poppins-SemiBold", fontSize: 20, color: colors.notification }}>
+                  ₹{" "}
+                </Text>
+                <Text style={{ fontFamily: "Poppins-SemiBold", fontSize: 20, color: colors.text }}>{totalAmount}</Text>
+              </View>
             </View>
             <Pressable
               // onPress={() => dispatch(addToCart(route.params))}
