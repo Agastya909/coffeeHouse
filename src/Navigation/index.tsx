@@ -6,6 +6,8 @@ import BottomTabs from "./BottomTabs";
 import Details from "../screens/itemDetail/Details";
 import { cartItem } from "../store/reducers/cart";
 import SplashScreen from "react-native-splash-screen";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 export type RootStackParams = {
   tabs: undefined;
@@ -26,13 +28,14 @@ const themeInfo = {
   }
 };
 const RootNavigator: React.FC = () => {
+  const { background, isTranslucent } = useSelector((State: RootState) => State.statusBarReducer);
   useEffect(() => {
     SplashScreen.hide();
   }, []);
 
   return (
     <>
-      <StatusBar backgroundColor={"#121212"} barStyle={"light-content"} />
+      <StatusBar barStyle={"light-content"} translucent={isTranslucent} backgroundColor={background} />
       <NavigationContainer theme={themeInfo}>
         <Stack.Navigator>
           <Stack.Screen name="tabs" component={BottomTabs} options={{ headerShown: false }} />

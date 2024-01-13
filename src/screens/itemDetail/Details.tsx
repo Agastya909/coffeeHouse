@@ -7,16 +7,24 @@ import { useTheme } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFavList } from "../../store/reducers/fav";
 import { addToCart, removeFromCart, emptyCart } from "../../store/reducers/cart";
+import { setTranslucent, unSetTranslucent } from "../../store/reducers/statusBar";
 import { RootState } from "../../store/store";
 
 type Props = NativeStackScreenProps<RootStackParams, "details">;
 
 const Details: React.FC<Props> = ({ route, navigation }) => {
+  useEffect(() => {
+    dispatch(setTranslucent());
+    return () => {
+      dispatch(unSetTranslucent());
+    };
+  }, []);
   const { name, imagelink_portrait, description, ingredients, roasted, price } = route.params;
   const { colors } = useTheme();
   const dispatch = useDispatch();
   const cartItem = useSelector((state: RootState) => state.cartReducer.itemList);
   const favItem = useSelector((state: RootState) => state.favItemReducer.itemList);
+  const isTranslucent = useSelector((state: RootState) => state.statusBarReducer.isTranslucent);
   const cartCount = cartItem.reduce((count, item) => {
     if (item.item.id === route.params.id) {
       return count + item.quantity;
@@ -34,8 +42,8 @@ const Details: React.FC<Props> = ({ route, navigation }) => {
         }}
         style={{
           position: "absolute",
-          top: 15,
-          left: 15,
+          top: isTranslucent ? 30 : 15,
+          left: isTranslucent ? 30 : 15,
           backgroundColor: colors.primary,
           borderRadius: 10,
           padding: 5,
@@ -48,8 +56,8 @@ const Details: React.FC<Props> = ({ route, navigation }) => {
         onPress={() => dispatch(updateFavList(route.params))}
         style={{
           position: "absolute",
-          top: 15,
-          right: 15,
+          top: isTranslucent ? 30 : 15,
+          right: isTranslucent ? 30 : 15,
           backgroundColor: colors.primary,
           borderRadius: 10,
           padding: 5,
