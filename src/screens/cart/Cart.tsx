@@ -48,8 +48,7 @@ const Cart: React.FC = () => {
                 borderRadius: 10,
                 elevation: 2,
                 flex: 1,
-                alignSelf: "center",
-                paddingVertical: 10
+                justifyContent: "center"
               }}>
               <Text
                 style={{

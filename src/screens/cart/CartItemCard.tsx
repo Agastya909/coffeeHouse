@@ -24,13 +24,14 @@ const CartItemCard: React.FC<{ cartItem: cartItemWithQuantity }> = ({ cartItem }
       <Image
         source={item.imagelink_square}
         alt={item.name}
-        style={{ height: 125, width: 125, borderRadius: 10, marginRight: 10 }}
+        style={{ height: "100%", width: "25%", borderRadius: 10, marginRight: 10 }}
       />
       <View style={{ display: "flex", flexDirection: "column", alignContent: "center" }}>
         <Text style={{ fontSize: 20, fontFamily: "Poppins-SemiBold", color: colors.text }}>{item.name}</Text>
         <Text style={{ fontSize: 14, fontFamily: "Poppins-Regular", color: colors.text }}>{item.type}</Text>
         <View
           style={{
+            marginTop: 5,
             flex: 1,
             display: "flex",
             flexDirection: "row",
@@ -43,7 +44,7 @@ const CartItemCard: React.FC<{ cartItem: cartItemWithQuantity }> = ({ cartItem }
               borderRadius: 10,
               padding: 5
             }}>
-            <Icon name="minus" size={28} color={colors.text} />
+            <Icon name="minus" size={24} color={colors.text} />
           </Pressable>
           <Text
             style={{
@@ -51,7 +52,7 @@ const CartItemCard: React.FC<{ cartItem: cartItemWithQuantity }> = ({ cartItem }
               fontSize: 20,
               color: colors.text,
               textAlign: "center",
-              marginHorizontal: 20
+              marginHorizontal: 15
             }}>
             {quantity}
           </Text>
@@ -62,9 +63,9 @@ const CartItemCard: React.FC<{ cartItem: cartItemWithQuantity }> = ({ cartItem }
               borderRadius: 10,
               padding: 5
             }}>
-            <Icon name="plus" size={28} color={colors.text} />
+            <Icon name="plus" size={24} color={colors.text} />
           </Pressable>
-          <Text style={{ marginLeft: 20, fontFamily: "Poppins-SemiBold", fontSize: 20, color: colors.notification }}>
+          <Text style={{ marginLeft: 15, fontFamily: "Poppins-SemiBold", fontSize: 20, color: colors.notification }}>
             ₹{" "}
           </Text>
           <Text style={{ fontFamily: "Poppins-SemiBold", fontSize: 20, color: colors.text }}>
