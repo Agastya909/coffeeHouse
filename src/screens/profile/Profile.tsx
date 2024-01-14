@@ -23,7 +23,7 @@ const Profile: React.FC = () => {
         style={{ height: 200, width: 200, borderRadius: 100, alignSelf: "center", marginTop: 50 }}
       />
       <TextBox textBody="Agastya" fontSize={32} marginTop={20} alignSelf="center" fontFamily="Poppins-SemiBold" />
-      <TextBox textBody="+91-9571336544" textAlign="center" color={colors.border} />
+      <TextBox textBody="+91-1234567890" textAlign="center" color={colors.border} />
       <TextBox textBody="FirstnameLastname@gmail.com" textAlign="center" color={colors.border} />
       <ScrollView bounces showsVerticalScrollIndicator={false} style={{ marginTop: 10 }}>
         <View

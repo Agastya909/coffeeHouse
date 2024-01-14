@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  currentAddress: "Fl no. 1, ZYX Apartments, ABC Colony, Jaipur, Rajasthan"
+  currentAddress: "Fl no. 1, ZYX Apartments, ABC Colony, Some City, uvw state"
 };
 
 export const addressReducer = createSlice({
