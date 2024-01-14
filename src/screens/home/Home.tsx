@@ -5,10 +5,13 @@ import { COFFEE_TYPES } from "../../assets/data/categories";
 import CoffeeData from "../../assets/data/coffee";
 import BeansData from "../../assets/data/beans";
 import ItemCard from "./ItemCard";
+import { cartItem } from "../../store/reducers/cart";
 
 const Home: React.FC = () => {
   const { colors } = useTheme();
   const [coffeeType, setCoffeeType] = useState<string>("All");
+  const [selectedDrinkData, setDrinkData] = useState<cartItem[]>(CoffeeData);
+  const [search, setSearch] = useState<string>("");
   return (
     <View style={{ marginHorizontal: 10, flex: 1 }}>
       {/* Header text */}
@@ -17,6 +20,14 @@ const Home: React.FC = () => {
       </Text>
       {/* search bar */}
       <TextInput
+        value={search}
+        onChangeText={setSearch}
+        onSubmitEditing={e => {
+          const searchTerm = e.nativeEvent.text;
+          const drinkData = CoffeeData.filter(element => element.name.toLowerCase().includes(searchTerm.toLowerCase()));
+          setDrinkData(drinkData);
+          setSearch("");
+        }}
         style={{
           marginTop: 20,
           paddingHorizontal: 10,
@@ -45,7 +56,15 @@ const Home: React.FC = () => {
             const isSelected = coffeeType === item;
             return (
               <Pressable
-                onPress={() => setCoffeeType(item)}
+                onPress={() => {
+                  if (item === "All") {
+                    setDrinkData(CoffeeData);
+                  } else {
+                    const drinkData = CoffeeData.filter(element => element.type === item);
+                    setDrinkData(drinkData);
+                  }
+                  setCoffeeType(item);
+                }}
                 style={{
                   paddingHorizontal: 10,
                   margin: 5
@@ -69,7 +88,7 @@ const Home: React.FC = () => {
         </View>
         {/* horizontal list for coffee */}
         <FlatList
-          data={CoffeeData}
+          data={selectedDrinkData}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           renderItem={({ index, item }) => <ItemCard item={item} key={index} />}
