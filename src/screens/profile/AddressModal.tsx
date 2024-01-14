@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Modal, Text, View, TextInput, Pressable, ToastAndroid } from "react-native";
+import { Modal, View, TextInput, Pressable, ToastAndroid } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { saveAddress } from "../../store/reducers/address";
+import { TextBox } from "../../component/TextBox";
 
 type Props = {
   isVisible: boolean;
@@ -42,9 +43,7 @@ const AddressModal: React.FC<Props> = ({ isVisible, close }) => {
             borderTopWidth: 2,
             borderTopColor: colors.notification
           }}>
-          <Text style={{ fontSize: 24, color: colors.text, textAlign: "center", fontFamily: "Poppins-Regular" }}>
-            Edit Address
-          </Text>
+          <TextBox textBody="Edit Address" textAlign="center" fontSize={24} />
           {inputArray.map((element, index) => (
             <TextInput
               key={index}
@@ -80,7 +79,6 @@ const AddressModal: React.FC<Props> = ({ isVisible, close }) => {
                 return;
               }
               const addressString = `${address.line1}, ${address.line2}, ${address.city}, ${address.state}`;
-              console.log(addressString);
               dispatch(saveAddress(addressString));
               setAddress({ city: "", line1: "", line2: "", state: "" });
               close();
@@ -95,15 +93,7 @@ const AddressModal: React.FC<Props> = ({ isVisible, close }) => {
               paddingTop: 10,
               paddingBottom: 5
             }}>
-            <Text
-              style={{
-                fontFamily: "Poppins-SemiBold",
-                fontSize: 16,
-                color: colors.text,
-                textAlign: "center"
-              }}>
-              Save New Address
-            </Text>
+            <TextBox textBody="Save New Address" fontFamily="Poppins-SemiBold" textAlign="center" />
           </Pressable>
         </View>
       </View>

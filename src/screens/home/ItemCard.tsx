@@ -1,15 +1,16 @@
 import React from "react";
-import { Image, ImageSourcePropType, Pressable, Text, TouchableOpacity, View } from "react-native";
+import { Image, Pressable, TouchableOpacity, View } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { RootStackParams } from "../../Navigation/index";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { updateFavList, favItem } from "../../store/reducers/fav";
+import { cartItem } from "../../store/reducers/cart";
 import { addToCart, removeFromCart } from "../../store/reducers/cart";
+import { TextBox } from "../../component/TextBox";
 
-type Props = favItem;
+type Props = cartItem;
 
 const ItemCard: React.FC<{ item: Props }> = ({ item }) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParams>>();
@@ -42,42 +43,21 @@ const ItemCard: React.FC<{ item: Props }> = ({ item }) => {
             paddingVertical: 4,
             paddingHorizontal: 8
           }}>
-          <Text style={{ color: colors.text, fontFamily: "Poppins-Regular" }}>{item.average_rating}</Text>
+          <TextBox textBody={String(item.average_rating)} fontSize={14} />
         </View>
       </View>
-      <Text
-        style={{
-          fontFamily: "Poppins-Regular",
-          fontSize: 16,
-          marginTop: 10,
-          color: colors.text,
-          fontWeight: "600"
-        }}>
-        {item.name}
-      </Text>
-      <Text
-        style={{
-          fontFamily: "Poppins-Regular",
-          fontSize: 12,
-          color: colors.border,
-          fontStyle: "italic",
-          marginTop: 5
-        }}>
-        {item.special_ingredient}
-      </Text>
+      <TextBox textBody={item.name} fontFamily="Poppins-SemiBold" marginTop={10} />
+      <TextBox
+        textBody={item.special_ingredient}
+        marginTop={5}
+        fontSize={12}
+        fontStyle="italic"
+        color={colors.border}
+      />
       <View style={{ display: "flex", flexDirection: "row", marginTop: 15, justifyContent: "space-between" }}>
         <View style={{ display: "flex", flexDirection: "row" }}>
-          <Text
-            style={{
-              fontFamily: "Poppins-Regular",
-              fontSize: 16,
-              color: colors.notification,
-              fontWeight: "800",
-              marginRight: 2
-            }}>
-            ₹
-          </Text>
-          <Text style={{ fontFamily: "Poppins-Regular", fontSize: 16, color: colors.border }}>{item.price}</Text>
+          <TextBox textBody="₹" color={colors.notification} marginRight={5} fontFamily="Poppins-SemiBold" />
+          <TextBox textBody={String(item.price)} marginRight={5} />
         </View>
         <View
           style={{
@@ -93,9 +73,9 @@ const ItemCard: React.FC<{ item: Props }> = ({ item }) => {
               <TouchableOpacity style={{ padding: 2 }} onPress={() => dispatch(removeFromCart(item.id))}>
                 <Icon name="minus" size={22} color={colors.text} />
               </TouchableOpacity>
-              <Text style={{ fontSize: 14, fontFamily: "Poppins-Regular", paddingHorizontal: 3 }}>
-                {cartItems[itemIndex].quantity}
-              </Text>
+              <View style={{ paddingHorizontal: 4 }}>
+                <TextBox textBody={String(cartItems[itemIndex].quantity)} fontSize={14} />
+              </View>
             </>
           ) : null}
           <TouchableOpacity style={{ padding: 2 }} onPress={() => dispatch(addToCart(item))}>

@@ -1,12 +1,13 @@
 import { useTheme } from "@react-navigation/native";
 import React, { useState } from "react";
-import { FlatList, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { FlatList, Pressable, ScrollView, TextInput, View } from "react-native";
 import { COFFEE_TYPES } from "../../assets/data/categories";
 import CoffeeData from "../../assets/data/coffee";
 import BeansData from "../../assets/data/beans";
 import ItemCard from "./ItemCard";
 import { cartItem } from "../../store/reducers/cart";
 import LottieView from "lottie-react-native";
+import { TextBox } from "../../component/TextBox";
 
 const Home: React.FC = () => {
   const { colors } = useTheme();
@@ -75,7 +76,7 @@ const Home: React.FC = () => {
                 }}
                 key={index}>
                 <View style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                  <Text style={{ color: isSelected ? colors.notification : colors.text }}>{item}</Text>
+                  <TextBox textBody={item} fontSize={14} color={isSelected ? colors.notification : colors.text} />
                   <View
                     style={{
                       height: 7,
@@ -98,7 +99,7 @@ const Home: React.FC = () => {
           renderItem={({ index, item }) => <ItemCard item={item} key={index} />}
           style={{ marginTop: 10 }}
         />
-        <Text style={{ fontSize: 22, fontFamily: "Poppins-SemiBold", color: "#FFF", marginTop: 15 }}>Coffee Beans</Text>
+        <TextBox textBody="Coffee Beans" marginTop={15} fontSize={22} fontFamily="Poppins-SemiBold" />
         <View
           style={{
             width: "100%",

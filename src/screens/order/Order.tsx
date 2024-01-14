@@ -2,11 +2,12 @@ import { useNavigation, useTheme } from "@react-navigation/native";
 import LottieView from "lottie-react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useState } from "react";
-import { Pressable, ScrollView, Text, TouchableOpacity, View, StyleSheet } from "react-native";
+import { Pressable, ScrollView, TouchableOpacity, View, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { RootStackParams } from "../../Navigation";
 import { useDispatch } from "react-redux";
 import { emptyCart } from "../../store/reducers/cart";
+import { TextBox } from "../../component/TextBox";
 
 const Order: React.FC = () => {
   const { colors } = useTheme();
@@ -44,16 +45,7 @@ const Order: React.FC = () => {
             source={require("../../assets/animations/order-animation.json")}
             style={{ width: 100, height: 100, alignSelf: "center" }}
           />
-          <Text
-            style={{
-              textAlign: "center",
-              fontFamily: "Poppins-SemiBold",
-              fontSize: 24,
-              color: colors.text,
-              marginTop: 10
-            }}>
-            Choose Payment Option
-          </Text>
+          <TextBox textBody="Choose Payment Option" textAlign="center" fontFamily="Poppins-SemiBold" fontSize={24} />
           <View
             style={{
               width: "100%",
@@ -84,14 +76,7 @@ const Order: React.FC = () => {
                       <Icon size={24} color={colors.notification} name="radiobox-blank" />
                     )}
                   </View>
-                  <Text
-                    style={{
-                      fontFamily: "Poppins-SemiBold",
-                      fontSize: 16,
-                      color: colors.text
-                    }}>
-                    {element}
-                  </Text>
+                  <TextBox textBody={element} fontFamily="Poppins-SemiBold" />
                 </TouchableOpacity>
               );
             })}
@@ -125,15 +110,7 @@ const Order: React.FC = () => {
               padding: 15,
               marginVertical: 10
             }}>
-            <Text
-              style={{
-                fontFamily: "Poppins-SemiBold",
-                fontSize: 16,
-                color: colors.text,
-                textAlign: "center"
-              }}>
-              Pay
-            </Text>
+            <TextBox textBody="Pay" fontFamily="Poppins-SemiBold" textAlign="center" />
           </Pressable>
         </View>
       ) : (
@@ -151,15 +128,12 @@ const Order: React.FC = () => {
               alignSelf: "center"
             }}
           />
-          <Text
-            style={{
-              fontFamily: "Poppins-SemiBold",
-              fontSize: 32,
-              color: colors.text,
-              textAlign: "center"
-            }}>
-            Order Placed successfully
-          </Text>
+          <TextBox
+            textBody="Order Placed successfully"
+            fontFamily="Poppins-SemiBold"
+            textAlign="center"
+            fontSize={32}
+          />
         </View>
       )}
     </>

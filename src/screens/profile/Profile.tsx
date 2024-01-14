@@ -1,12 +1,13 @@
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useState } from "react";
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { RootStackParams } from "../../Navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import AddressModal from "./AddressModal";
+import { TextBox } from "../../component/TextBox";
 
 const Profile: React.FC = () => {
   const { colors } = useTheme();
@@ -21,32 +22,9 @@ const Profile: React.FC = () => {
         alt={"Agastya"}
         style={{ height: 200, width: 200, borderRadius: 100, alignSelf: "center", marginTop: 50 }}
       />
-      <Text
-        style={{
-          fontFamily: "Poppins-SemiBold",
-          fontSize: 32,
-          color: colors.text,
-          marginTop: 20,
-          alignSelf: "center"
-        }}>
-        Agastya
-      </Text>
-      <Text
-        style={{
-          fontFamily: "Poppins-Regular",
-          fontSize: 16,
-          alignSelf: "center"
-        }}>
-        +91-9571336544
-      </Text>
-      <Text
-        style={{
-          fontFamily: "Poppins-Regular",
-          fontSize: 15,
-          alignSelf: "center"
-        }}>
-        FirstnameLastname@gmail.com
-      </Text>
+      <TextBox textBody="Agastya" fontSize={32} marginTop={20} alignSelf="center" fontFamily="Poppins-SemiBold" />
+      <TextBox textBody="+91-9571336544" textAlign="center" color={colors.border} />
+      <TextBox textBody="FirstnameLastname@gmail.com" textAlign="center" color={colors.border} />
       <ScrollView bounces showsVerticalScrollIndicator={false} style={{ marginTop: 10 }}>
         <View
           style={{
@@ -73,9 +51,7 @@ const Profile: React.FC = () => {
                 justifyContent: "space-between"
               }}>
               <Icon name="shopping" size={24} color={colors.notification} />
-              <Text style={{ fontFamily: "Poppins-Regular", fontSize: 16, color: colors.text, marginHorizontal: 15 }}>
-                View Order History
-              </Text>
+              <TextBox textBody="View Order History" marginLeft={15} />
             </View>
             <TouchableOpacity
               onPress={() => navigation.navigate("orderhistory")}
@@ -97,12 +73,8 @@ const Profile: React.FC = () => {
             }}>
             <Icon name="home" size={24} color={colors.notification} />
             <View style={{ flex: 1 }}>
-              <Text style={{ fontFamily: "Poppins-Regular", fontSize: 16, color: colors.text, marginHorizontal: 15 }}>
-                Current Address
-              </Text>
-              <Text style={{ fontFamily: "Poppins-Regular", fontSize: 14, color: colors.text, marginHorizontal: 15 }}>
-                {address}
-              </Text>
+              <TextBox textBody="Current Address" marginLeft={15} />
+              <TextBox textBody={address} marginLeft={15} fontSize={14} />
             </View>
             <TouchableOpacity
               onPress={() => setAddressEditable(true)}

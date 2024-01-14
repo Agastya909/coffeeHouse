@@ -8,6 +8,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/reducers/cart";
 import LottieView from "lottie-react-native";
+import { TextBox } from "../../component/TextBox";
 
 const FavItemCard: React.FC<{ item: favItem }> = ({ item }) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParams>>();
@@ -29,8 +30,8 @@ const FavItemCard: React.FC<{ item: favItem }> = ({ item }) => {
         }}>
         <Image source={item.imagelink_square} alt={item.name} style={{ height: 75, width: 75, borderRadius: 10 }} />
         <View style={{ marginHorizontal: 15, flex: 1, alignSelf: "center" }}>
-          <Text style={{ fontSize: 16, fontFamily: "Poppins-SemiBold", color: colors.text }}>{item.name}</Text>
-          <Text style={{ fontSize: 14, fontFamily: "Poppins-Regular", color: colors.text }}>{item.type}</Text>
+          <TextBox textBody={item.name} fontFamily="Poppins-SemiBold" />
+          <TextBox textBody={item.type} fontSize={14} />
         </View>
         {isAddToCart === false ? (
           <Pressable
@@ -49,7 +50,7 @@ const FavItemCard: React.FC<{ item: favItem }> = ({ item }) => {
               elevation: 2,
               alignSelf: "center"
             }}>
-            <Text style={{ fontFamily: "Poppins-SemiBold", fontSize: 14, color: colors.text }}>Move to Cart</Text>
+            <TextBox textBody="Move to Cart" fontSize={14} fontFamily="Poppins-SemiBold" />
           </Pressable>
         ) : (
           <LottieView

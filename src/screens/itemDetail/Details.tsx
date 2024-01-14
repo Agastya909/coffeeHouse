@@ -1,14 +1,15 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React, { useEffect, useState } from "react";
-import { Image, Pressable, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect } from "react";
+import { Image, Pressable, ScrollView, TouchableOpacity, View } from "react-native";
 import { RootStackParams } from "../../Navigation";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTheme } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFavList } from "../../store/reducers/fav";
-import { addToCart, removeFromCart, emptyCart } from "../../store/reducers/cart";
+import { addToCart, removeFromCart } from "../../store/reducers/cart";
 import { setTranslucent, unSetTranslucent } from "../../store/reducers/statusBar";
 import { RootState } from "../../store/store";
+import { TextBox } from "../../component/TextBox";
 
 type Props = NativeStackScreenProps<RootStackParams, "details">;
 
@@ -78,30 +79,22 @@ const Details: React.FC<Props> = ({ route, navigation }) => {
             alignItems: "center"
           }}>
           <View style={{ width: "50%" }}>
-            <Text style={{ fontFamily: "Poppins-SemiBold", fontSize: 28, color: colors.text, marginTop: 5 }}>
-              {name}
-            </Text>
-            <Text style={{ fontFamily: "Poppins-Regular", fontSize: 14 }}>{ingredients}</Text>
+            <TextBox textBody={name} fontSize={32} fontFamily="Poppins-SemiBold" />
+            <TextBox textBody={ingredients} fontSize={14} />
           </View>
-          <Text
-            style={{
-              fontFamily: "Poppins-Regular",
-              fontSize: 14,
-              paddingVertical: 10,
-              paddingHorizontal: 20,
-              backgroundColor: colors.card,
-              borderRadius: 10
-            }}>
-            {roasted}
-          </Text>
+          {roasted !== undefined ? (
+            <View style={{ backgroundColor: colors.card, padding: 10, borderRadius: 10 }}>
+              <TextBox textBody={roasted} fontSize={14} color={colors.border} />
+            </View>
+          ) : null}
         </View>
         {/* desc */}
         <View
           style={{
             margin: 10
           }}>
-          <Text style={{ fontFamily: "Poppins-Regular", fontSize: 16, color: colors.text }}>Description</Text>
-          <Text style={{ fontFamily: "Poppins-Regular", fontSize: 14, color: colors.text }}>{description}</Text>
+          <TextBox textBody="Description" fontFamily="Poppins-SemiBold" />
+          <TextBox textBody={description} fontSize={14} />
         </View>
       </ScrollView>
       <View
@@ -112,12 +105,18 @@ const Details: React.FC<Props> = ({ route, navigation }) => {
           justifyContent: "space-between"
         }}>
         <View style={{ width: "40%" }}>
-          <Text style={{ fontFamily: "Poppins-SemiBold", fontSize: 12, color: colors.text, textAlign: "center" }}>
-            {cartCount === 0 ? "Price" : "Total Amount"}
-          </Text>
-          <Text style={{ fontFamily: "Poppins-SemiBold", fontSize: 18, color: colors.text, textAlign: "center" }}>
-            ₹ {cartCount === 0 ? price : price * cartCount}
-          </Text>
+          <TextBox
+            textBody={cartCount === 0 ? "Price" : "Total Amount"}
+            fontSize={12}
+            fontFamily="Poppins-SemiBold"
+            textAlign="center"
+          />
+          <TextBox
+            textBody={`₹ ${cartCount === 0 ? price : price * cartCount}`}
+            fontSize={18}
+            fontFamily="Poppins-SemiBold"
+            textAlign="center"
+          />
         </View>
 
         {cartCount === 0 ? (
@@ -131,9 +130,7 @@ const Details: React.FC<Props> = ({ route, navigation }) => {
               elevation: 2,
               flex: 1
             }}>
-            <Text style={{ fontFamily: "Poppins-SemiBold", fontSize: 16, color: colors.text, textAlign: "center" }}>
-              Add to cart
-            </Text>
+            <TextBox textBody="Add to Cart" textAlign="center" fontFamily="Poppins-SemiBold" />
           </Pressable>
         ) : (
           <View
@@ -147,16 +144,9 @@ const Details: React.FC<Props> = ({ route, navigation }) => {
               }}>
               <Icon name="minus" size={28} color={colors.text} />
             </Pressable>
-            <Text
-              style={{
-                fontFamily: "Poppins-SemiBold",
-                fontSize: 20,
-                color: colors.text,
-                textAlign: "center",
-                marginHorizontal: 20
-              }}>
-              {cartCount}
-            </Text>
+            <View style={{ marginHorizontal: 20 }}>
+              <TextBox textBody={String(cartCount)} textAlign="center" fontFamily="Poppins-SemiBold" fontSize={20} />
+            </View>
             <Pressable
               onPress={() => dispatch(addToCart(route.params))}
               style={{

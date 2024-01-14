@@ -1,27 +1,22 @@
 import React from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, View } from "react-native";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { useTheme } from "@react-navigation/native";
 import FavItemCard from "./FavItemCard";
 import LottieView from "lottie-react-native";
+import { TextBox } from "../../component/TextBox";
 
 const Fav: React.FC = () => {
   const favItems = useSelector((state: RootState) => state.favItemReducer.itemList);
-  const { colors } = useTheme();
   return (
     <View style={{ flex: 1 }}>
-      <Text
-        style={{
-          fontSize: 30,
-          fontFamily: "Poppins-SemiBold",
-          color: colors.text,
-          marginTop: 30,
-          marginBottom: 10,
-          marginHorizontal: 10
-        }}>
-        Your favourite items
-      </Text>
+      <TextBox
+        textBody="Your favorite items"
+        fontSize={30}
+        fontFamily="Poppins-SemiBold"
+        marginTop={30}
+        marginLeft={10}
+      />
       {favItems.length === 0 ? (
         <>
           <LottieView
@@ -30,15 +25,7 @@ const Fav: React.FC = () => {
             source={require("../../assets/animations/coffe-cup-animation.json")}
             style={{ height: 200, width: 200, alignSelf: "center", marginVertical: "auto", flex: 0.8 }}
           />
-          <Text
-            style={{
-              fontSize: 20,
-              fontFamily: "Poppins-Regular",
-              color: colors.text,
-              textAlign: "center"
-            }}>
-            Wow, so empty
-          </Text>
+          <TextBox textBody="Wow, so empty" fontSize={20} textAlign="center" />
         </>
       ) : (
         <FlatList
