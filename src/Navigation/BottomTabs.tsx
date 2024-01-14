@@ -10,7 +10,7 @@ import Fav from "../screens/favourite/Fav";
 
 const BottomTabNavigator = createBottomTabNavigator();
 
-const BottomTabs = () => {
+const BottomTabs: React.FC = () => {
   const { colors } = useTheme();
   return (
     <BottomTabNavigator.Navigator

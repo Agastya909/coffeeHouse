@@ -6,6 +6,7 @@ import CoffeeData from "../../assets/data/coffee";
 import BeansData from "../../assets/data/beans";
 import ItemCard from "./ItemCard";
 import { cartItem } from "../../store/reducers/cart";
+import LottieView from "lottie-react-native";
 
 const Home: React.FC = () => {
   const { colors } = useTheme();
@@ -15,9 +16,12 @@ const Home: React.FC = () => {
   return (
     <View style={{ marginHorizontal: 10, flex: 1 }}>
       {/* Header text */}
-      <Text style={{ width: "80%", fontSize: 32, fontFamily: "Poppins-SemiBold", color: "#FFF", marginTop: 40 }}>
-        Find the best Drink for you
-      </Text>
+      <LottieView
+        autoPlay
+        loop
+        style={{ width: 75, height: 75, alignSelf: "center", marginTop: 30 }}
+        source={require("../../assets/animations/home-animation.json")}
+      />
       {/* search bar */}
       <TextInput
         value={search}

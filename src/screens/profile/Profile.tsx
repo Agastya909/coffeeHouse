@@ -1,11 +1,13 @@
 import { useNavigation, useTheme } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { RootStackParams } from "../../Navigation";
 
 const Profile: React.FC = () => {
   const { colors } = useTheme();
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParams>>();
   return (
     <View style={{ marginHorizontal: 10, flex: 1 }}>
       <Image
@@ -70,7 +72,7 @@ const Profile: React.FC = () => {
               </Text>
             </View>
             <TouchableOpacity
-              // onPress={() => {}}
+              onPress={() => navigation.navigate("orderhistory")}
               style={{ backgroundColor: colors.primary, borderRadius: 10, padding: 5 }}>
               <Icon name="arrow-right" size={24} color={colors.text} />
             </TouchableOpacity>

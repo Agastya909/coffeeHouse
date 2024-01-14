@@ -66,6 +66,7 @@ const Order: React.FC = () => {
             {paymentMethods.map((element, index) => {
               return (
                 <TouchableOpacity
+                  key={index}
                   onPress={() => setPaymentMethod(element)}
                   style={{
                     marginVertical: 5,

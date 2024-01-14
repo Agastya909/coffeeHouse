@@ -9,11 +9,13 @@ import SplashScreen from "react-native-splash-screen";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import Order from "../screens/order/Order";
+import OrderHistory from "../screens/order/OrderHistory";
 
 export type RootStackParams = {
   tabs: undefined;
   details: cartItem;
   order: cartItemWithQuantity[];
+  orderhistory: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParams>();
@@ -49,6 +51,11 @@ const RootNavigator: React.FC = () => {
           <Stack.Screen
             name="order"
             component={Order}
+            options={{ headerShown: false, animation: "slide_from_right" }}
+          />
+          <Stack.Screen
+            name="orderhistory"
+            component={OrderHistory}
             options={{ headerShown: false, animation: "slide_from_right" }}
           />
         </Stack.Navigator>
