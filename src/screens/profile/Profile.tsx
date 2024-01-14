@@ -1,13 +1,19 @@
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React from "react";
+import React, { useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { RootStackParams } from "../../Navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import AddressModal from "./AddressModal";
 
 const Profile: React.FC = () => {
   const { colors } = useTheme();
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParams>>();
+  const address = useSelector((state: RootState) => state.addressReducer.currentAddress);
+  const [addressEditable, setAddressEditable] = useState<boolean>(false);
+
   return (
     <View style={{ marginHorizontal: 10, flex: 1 }}>
       <Image
@@ -95,17 +101,18 @@ const Profile: React.FC = () => {
                 Current Address
               </Text>
               <Text style={{ fontFamily: "Poppins-Regular", fontSize: 14, color: colors.text, marginHorizontal: 15 }}>
-                Fl no. 1, ZYX Apartments, ABC Colony, Jaipur, Rajasthan
+                {address}
               </Text>
             </View>
             <TouchableOpacity
-              // onPress={() => {}}
+              onPress={() => setAddressEditable(true)}
               style={{ backgroundColor: colors.primary, borderRadius: 10, padding: 5 }}>
               <Icon name="pencil" size={24} color={colors.text} />
             </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
+      <AddressModal isVisible={addressEditable} close={() => setAddressEditable(false)} />
     </View>
   );
 };
