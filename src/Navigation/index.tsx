@@ -4,14 +4,16 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BottomTabs from "./BottomTabs";
 import Details from "../screens/itemDetail/Details";
-import { cartItem } from "../store/reducers/cart";
+import { cartItem, cartItemWithQuantity } from "../store/reducers/cart";
 import SplashScreen from "react-native-splash-screen";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
+import Order from "../screens/order/Order";
 
 export type RootStackParams = {
   tabs: undefined;
   details: cartItem;
+  order: cartItemWithQuantity[];
 };
 
 const Stack = createNativeStackNavigator<RootStackParams>();
@@ -42,6 +44,11 @@ const RootNavigator: React.FC = () => {
           <Stack.Screen
             name="details"
             component={Details}
+            options={{ headerShown: false, animation: "slide_from_right" }}
+          />
+          <Stack.Screen
+            name="order"
+            component={Order}
             options={{ headerShown: false, animation: "slide_from_right" }}
           />
         </Stack.Navigator>

@@ -1,12 +1,15 @@
-import { useTheme } from "@react-navigation/native";
-import LottieView from "lottie-react-native";
 import React from "react";
 import { FlatList, Pressable, Text, View } from "react-native";
+import { useNavigation, useTheme } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import LottieView from "lottie-react-native";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import CartItemCard from "./CartItemCard";
+import { RootStackParams } from "../../Navigation";
 
 const Cart: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const { colors } = useTheme();
   const cartItem = useSelector((state: RootState) => state.cartReducer.itemList);
   const totalAmount = cartItem.reduce((total, cartItem) => {
@@ -42,7 +45,7 @@ const Cart: React.FC = () => {
               </View>
             </View>
             <Pressable
-              // onPress={() => dispatch(addToCart(route.params))}
+              onPress={() => navigation.navigate("order", cartItem)}
               style={{
                 backgroundColor: colors.primary,
                 borderRadius: 10,
